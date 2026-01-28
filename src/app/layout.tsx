@@ -72,7 +72,7 @@ export async function generateMetadata(): Promise<Metadata> {
   try {
     url = new URL(rawUrl).toString();
   } catch {
-    url = "https://venturadigital.co.nz";
+    url = "https://vanturadigital.co.nz";
   }
 
   const ogImageUrl = settings?.ogImage?.asset?._ref
