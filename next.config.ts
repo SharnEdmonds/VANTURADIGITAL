@@ -101,7 +101,9 @@ const nextConfig: NextConfig = {
     // ─── Experimental Optimizations ──────────────────────────────
     experimental: {
         // Optimize package imports for smaller bundles
-        optimizePackageImports: ["framer-motion", "clsx"],
+        optimizePackageImports: ["framer-motion", "clsx", "@sanity/icons", "lucide-react"],
+        // Inline critical CSS to reduce render-blocking requests
+        optimizeCss: true,
     },
 };
 
