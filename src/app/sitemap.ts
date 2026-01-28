@@ -5,7 +5,8 @@ import type { MetadataRoute } from "next";
 // ═══════════════════════════════════════════════════════════════
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://venturadigital.co.nz";
+    // Ensure valid absolute URLs for production
+    const baseUrl = "https://vanturadigital.co.nz";
     const now = new Date();
 
     // Static marketing pages
