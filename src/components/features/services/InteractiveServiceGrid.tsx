@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -62,6 +62,17 @@ function ServiceCard({
     imageSrc,
 }: ServiceCardProps) {
     const [isHovered, setIsHovered] = useState(false);
+    const videoRef = useRef<HTMLVideoElement>(null);
+
+    useEffect(() => {
+        if (videoRef.current) {
+            if (isHovered) {
+                videoRef.current.play().catch(() => { });
+            } else {
+                videoRef.current.pause();
+            }
+        }
+    }, [isHovered]);
 
     return (
         <motion.article
@@ -86,10 +97,11 @@ function ServiceCard({
                 >
                     {videoSrc ? (
                         <video
-                            autoPlay
+                            ref={videoRef}
                             muted
                             loop
                             playsInline
+                            preload="none"
                             className="h-full w-full object-cover"
                         >
                             <source src={videoSrc} type="video/mp4" />
