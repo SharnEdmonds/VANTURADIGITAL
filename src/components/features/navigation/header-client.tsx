@@ -1,0 +1,73 @@
+"use client";
+
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { Container } from "@/components/ui";
+import { MobileMenu } from "./mobile-menu";
+
+// ═══════════════════════════════════════════════════════════════
+// HeaderClient — Client component with hover animations
+// ═══════════════════════════════════════════════════════════════
+
+interface NavItem {
+    label: string;
+    href: string;
+    external?: boolean;
+    _key?: string;
+}
+
+interface HeaderClientProps {
+    navItems: NavItem[];
+}
+
+export function HeaderClient({ navItems }: HeaderClientProps) {
+    return (
+        <header className="sticky top-0 z-40 w-full border-b border-gallery/10 bg-carbon/80 backdrop-blur-md">
+            <Container className="flex h-16 items-center justify-between">
+                {/* Logo with hover effect */}
+                <Link
+                    href="/"
+                    className="group relative text-lg font-bold tracking-tight text-gallery"
+                >
+                    <span className="relative z-10">Vantura Digital</span>
+                    <motion.span
+                        className="absolute bottom-0 left-0 h-[2px] w-0 bg-signal"
+                        whileHover={{ width: "100%" }}
+                        transition={{ duration: 0.3 }}
+                    />
+                </Link>
+
+                {/* Desktop nav with hover effects */}
+                <nav className="hidden items-center gap-8 md:flex">
+                    {navItems.map((item, i) => (
+                        <Link
+                            key={"_key" in item ? item._key : i}
+                            href={item.href}
+                            className="group relative py-2 text-sm font-medium text-text-secondary transition-colors hover:text-gallery"
+                            {...("external" in item && item.external
+                                ? { target: "_blank", rel: "noopener noreferrer" }
+                                : {})}
+                        >
+                            {item.label}
+                            {/* Animated underline */}
+                            <span className="absolute bottom-0 left-0 h-[1px] w-0 bg-signal transition-all duration-300 group-hover:w-full" />
+                        </Link>
+                    ))}
+
+                    {/* CTA Button */}
+                    <Link
+                        href="/contact"
+                        className="ml-2 inline-flex h-10 items-center justify-center border border-signal bg-transparent px-5 text-sm font-bold uppercase tracking-wider text-signal transition-all hover:bg-signal hover:text-carbon"
+                    >
+                        Get Audit
+                    </Link>
+                </nav>
+
+                {/* Mobile nav */}
+                <MobileMenu navItems={navItems} />
+            </Container>
+        </header>
+    );
+}
+
+export default HeaderClient;

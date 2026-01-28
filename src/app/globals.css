@@ -1,0 +1,148 @@
+@import "tailwindcss";
+
+/*
+ * ═══════════════════════════════════════════════════════════════
+ * Vantura Digital — Design Token System
+ * ═══════════════════════════════════════════════════════════════
+ * Swiss/Neo-Brutalist grid system with mathematical spacing.
+ * All spacing derives from an 8px base unit.
+ * Typography: Inter (Bold/Headers, Regular/Body).
+ */
+
+@theme {
+  /* ─── Brand Palette ─────────────────────────────────────── */
+  --color-carbon: #1A1A1B;
+  --color-carbon-light: #2A2A2B;
+  --color-carbon-dark: #111112;
+  --color-signal: #FF4F00;
+  --color-signal-hover: #E64700;
+  --color-signal-light: #FF6A26;
+  --color-gallery: #EEEEEE;
+  --color-gallery-dark: #D4D4D4;
+  --color-gallery-light: #F5F5F5;
+
+  /* ─── Semantic Tokens ───────────────────────────────────── */
+  --color-surface: #1A1A1B;
+  --color-surface-elevated: #2A2A2B;
+  --color-border: rgb(238 238 238 / 0.10);
+  --color-border-hover: rgb(255 79 0 / 0.40);
+  --color-text-primary: #EEEEEE;
+  --color-text-secondary: rgb(238 238 238 / 0.60);
+  --color-text-muted: rgb(238 238 238 / 0.40);
+
+  /* ─── Swiss Grid Spacing (8px base unit) ────────────────── */
+  --spacing-grid-1: 0.5rem;
+  /*   8px */
+  --spacing-grid-2: 1rem;
+  /*  16px */
+  --spacing-grid-3: 1.5rem;
+  /*  24px */
+  --spacing-grid-4: 2rem;
+  /*  32px */
+  --spacing-grid-5: 2.5rem;
+  /*  40px */
+  --spacing-grid-6: 3rem;
+  /*  48px */
+  --spacing-grid-8: 4rem;
+  /*  64px */
+  --spacing-grid-10: 5rem;
+  /*  80px */
+  --spacing-grid-12: 6rem;
+  /*  96px */
+  --spacing-grid-15: 7.5rem;
+  /* 120px */
+  --spacing-grid-20: 10rem;
+  /* 160px */
+  --spacing-grid-25: 12.5rem;
+  /* 200px */
+  --spacing-grid-30: 15rem;
+  /* 240px */
+  --spacing-grid-40: 20rem;
+  /* 320px */
+
+  /* ─── Typography ────────────────────────────────────────── */
+  --font-heading: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+/*
+ * ═══════════════════════════════════════════════════════════════
+ * Zero-CLS Typography Scaffold
+ * ═══════════════════════════════════════════════════════════════
+ * Explicit size-adjust + font-display: swap prevents
+ * layout shift when custom fonts load.
+ */
+
+@layer base {
+  :root {
+    /* Legacy semantic tokens — used by existing components via var() */
+    --color-primary: #0f0f0f;
+    --color-secondary: #1a1a2e;
+    --color-accent: #FF4F00;
+    /* Signal Orange */
+    --color-accent-foreground: #ffffff;
+    --color-background: #1A1A1B;
+    --color-foreground: #EEEEEE;
+    --color-muted: #6b7280;
+    --color-muted-foreground: #9ca3af;
+    /* --color-surface, --font-* are provided by @theme above */
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-background: #111112;
+      --color-foreground: #EEEEEE;
+    }
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    line-height: 1.5;
+  }
+
+  /*
+   * Prevent CLS: reserve space for images that haven't loaded.
+   * Every <img> inside the app must have explicit width/height or
+   * use the Next.js <Image> component with fill + sizes.
+   */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /*
+   * ═══════════════════════════════════════════════════════════════
+   * Luxurious Scroll — Hide Native Scrollbar
+   * ═══════════════════════════════════════════════════════════════
+   */
+  html {
+    scrollbar-width: none;
+    /* Firefox */
+  }
+
+  html::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari, Edge */
+  }
+
+  /*
+   * Custom Cursor Utility Classes
+   */
+  .cursor-none {
+    cursor: none !important;
+  }
+
+  .cursor-none * {
+    cursor: none !important;
+  }
+}
