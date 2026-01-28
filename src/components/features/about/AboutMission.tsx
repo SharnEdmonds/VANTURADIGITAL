@@ -5,10 +5,10 @@ import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 
 const stats = [
-    { value: "45", label: "Projects Shipped", suffix: "+" },
+    { value: "4", label: "Projects Shipped", suffix: "+" },
     { value: "98", label: "Retention Rate", suffix: "%" },
     { value: "3.2", label: "Avg ROAS", suffix: "x" },
-    { value: "12", label: "Active Retainers", suffix: "+" },
+    { value: "2", label: "Active Retainers", suffix: "+" },
 ];
 
 export function AboutMission() {

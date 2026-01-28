@@ -20,7 +20,9 @@ export async function Header() {
     // Use static fallback
   }
 
-  const navItems = (settings?.headerNav ?? [...headerNavFallback]) as { label: string; href: string; external?: boolean; _key?: string }[];
+  const navItems = (settings?.headerNav && settings.headerNav.length > 0
+    ? settings.headerNav
+    : [...headerNavFallback]) as { label: string; href: string; external?: boolean; _key?: string }[];
 
   return <HeaderClient navItems={navItems} />;
 }
