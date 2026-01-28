@@ -121,8 +121,9 @@ export function BrandStatementAnimated() {
               <Link
                 href="/about"
                 className="inline-flex h-12 items-center justify-center px-8 font-heading text-sm font-bold uppercase tracking-wider text-text-secondary transition-colors hover:text-gallery"
+                aria-label="Learn more about Vantura Digital"
               >
-                Learn More
+                About Vantura
               </Link>
             </motion.div>
           </motion.div>

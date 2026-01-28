@@ -5,7 +5,8 @@ import type { MetadataRoute } from "next";
 // ═══════════════════════════════════════════════════════════════
 
 export default function robots(): MetadataRoute.Robots {
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://venturadigital.co.nz";
+    // Ensure we use the production domain if env var is missing or malformed
+    const baseUrl = "https://vanturadigital.co.nz";
 
     return {
         rules: [
