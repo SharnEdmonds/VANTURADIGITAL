@@ -14,7 +14,7 @@ import { LeadCaptureButton } from "./lead-capture-button";
 
 function AnimatedMetric({ value, suffix = "" }: { value: string; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, amount: 0.5 });
   const [displayValue, setDisplayValue] = useState("0");
 
   useEffect(() => {
