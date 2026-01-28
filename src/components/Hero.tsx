@@ -35,7 +35,8 @@ export default function Hero() {
                     muted
                     loop
                     playsInline
-                    preload="metadata"
+                    preload="auto"
+                    poster="/images/og-default.png"
                     className="w-full h-full object-cover"
                     aria-hidden="true"
                 >

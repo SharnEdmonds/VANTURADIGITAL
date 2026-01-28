@@ -128,7 +128,7 @@ export function LeadCaptureSection() {
 
           {/* Trust signal */}
           <p className="mt-grid-6 font-mono text-xs text-text-muted">
-            No contracts. No retainers. Results-first engagement.
+            Flexible retainers. Transparent pricing. Results-first engagement.
           </p>
         </div>
       </div>

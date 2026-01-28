@@ -101,9 +101,9 @@ export function BrandStatementAnimated() {
             className="flex flex-col justify-end"
           >
             <p className="mb-8 text-lg leading-relaxed text-text-secondary">
-              We don&apos;t do retainers. We don&apos;t do fluff. We engineer
-              digital systems that generate measurable returns — then we get
-              out of the way. Three pillars. Zero waste. Every dollar tracked.
+              We operate on strategic retainers — not bloated agency contracts. Retainers
+              let us invest in your growth continuously, rather than nickel-and-diming
+              every request. Three pillars. Zero waste. Every dollar tracked.
             </p>
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -289,8 +289,8 @@ export function ProcessAnimated() {
 
 const differentiators = [
   {
-    title: "No Retainers",
-    desc: "We don't lock you into long-term contracts. Every engagement is project-based with clear deliverables and exit points.",
+    title: "Strategic Retainers",
+    desc: "Our retainers ensure sustained performance — not locked-in contracts. Predictable costs, priority support, and continuous optimization beat ad-hoc billing every time.",
   },
   {
     title: "Full Transparency",
@@ -412,7 +412,7 @@ export function CTASectionAnimated() {
               </Link>
             </div>
             <p className="mt-8 font-mono text-xs text-text-muted">
-              No contracts. No retainers. Results-first engagement.
+              Flexible retainers. Transparent pricing. Results-first engagement.
             </p>
           </div>
         </motion.div>

@@ -9,6 +9,11 @@ import type { SiteSettings } from "@/types";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import { CustomCursor, ScrollProgress } from "@/components/ui";
+import {
+  OrganizationSchema,
+  WebSiteSchema,
+  LocalBusinessSchema,
+} from "@/components/seo";
 
 // ═══════════════════════════════════════════════════════════════
 // Font Loading — swap + size-adjust = zero CLS
@@ -137,6 +142,17 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       className={`${inter.variable} ${jetbrainsMono.variable}`}
       suppressHydrationWarning
     >
+      <head>
+        {/* Preconnect to external domains for performance */}
+        <link rel="preconnect" href="https://cdn.sanity.io" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://cdn.sanity.io" />
+
+        {/* JSON-LD Structured Data for SEO */}
+        <OrganizationSchema />
+        <WebSiteSchema />
+        <LocalBusinessSchema />
+      </head>
       <body
         className="min-h-screen cursor-none bg-[var(--color-background)] font-sans antialiased"
         suppressHydrationWarning

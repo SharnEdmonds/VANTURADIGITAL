@@ -37,9 +37,9 @@ export function HeaderClient({ navItems }: HeaderClientProps) {
                         <Image
                             src="/images/logo-with-text.png"
                             alt="Vantura Digital"
-                            width={180}
-                            height={40}
-                            className="h-8 w-auto"
+                            width={260}
+                            height={50}
+                            style={{ height: '50px', width: 'auto' }}
                             priority
                         />
                     </motion.div>

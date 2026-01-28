@@ -39,7 +39,7 @@ export function DeviceShowcase() {
     return (
         <section
             ref={sectionRef}
-            className="relative overflow-hidden bg-carbon py-24 lg:py-32"
+            className="relative overflow-hidden bg-carbon py-12 md:py-24 lg:py-32"
         >
             <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
                 {/* Two-column layout */}
@@ -130,8 +130,11 @@ export function DeviceShowcase() {
                         </motion.a>
                     </div>
 
-                    {/* Right column - Device mockups (responsive) */}
-                    <div className="relative h-[500px] md:h-[550px] lg:h-[700px]" style={{ perspective: "2000px" }}>
+                    {/* Mobile separator - shows only on mobile where device is hidden */}
+                    <div className="mt-4 block h-px w-full bg-gallery/10 md:hidden" />
+
+                    {/* Right column - Device mockups (hidden on mobile) */}
+                    <div className="relative hidden h-[550px] md:block lg:h-[700px]" style={{ perspective: "2000px" }}>
 
                         {/* MacBook - desktop only, much larger */}
                         <motion.div
@@ -158,7 +161,7 @@ export function DeviceShowcase() {
                                 y: iphoneY,
                                 rotateY: iphoneRotate,
                             }}
-                            className="absolute left-1/2 top-1/2 z-20 w-[90%] max-w-[420px] -translate-x-1/2 -translate-y-1/2 md:hidden"
+                            className="absolute left-1/2 top-1/2 z-20 w-[70%] max-w-[300px] -translate-x-1/2 -translate-y-1/2 md:hidden"
                             data-cursor="view"
                         >
                             <Image
