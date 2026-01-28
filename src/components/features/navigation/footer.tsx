@@ -54,6 +54,7 @@ export async function Footer() {
               {[
                 { label: "Services", href: "/services" },
                 { label: "About", href: "/about" },
+                { label: "Blog", href: "/blog" },
                 { label: "Contact", href: "/contact" },
               ].map((item) => (
                 <Link

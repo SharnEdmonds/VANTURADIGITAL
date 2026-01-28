@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui";
 import { MobileMenu } from "./mobile-menu";
@@ -22,6 +23,14 @@ interface HeaderClientProps {
 }
 
 export function HeaderClient({ navItems }: HeaderClientProps) {
+    const pathname = usePathname();
+    const isHomePage = pathname === "/";
+
+    // Add Home link when not on homepage
+    const displayNavItems = isHomePage
+        ? navItems
+        : [{ label: "Home", href: "/" }, ...navItems];
+
     return (
         <header className="sticky top-0 z-40 w-full border-b border-gallery/10 bg-carbon/80 backdrop-blur-md">
             <Container className="flex h-16 items-center justify-between">
@@ -47,7 +56,7 @@ export function HeaderClient({ navItems }: HeaderClientProps) {
 
                 {/* Desktop nav with hover effects */}
                 <nav className="hidden items-center gap-8 md:flex">
-                    {navItems.map((item, i) => (
+                    {displayNavItems.map((item, i) => (
                         <Link
                             key={"_key" in item ? item._key : i}
                             href={item.href}
@@ -72,7 +81,7 @@ export function HeaderClient({ navItems }: HeaderClientProps) {
                 </nav>
 
                 {/* Mobile nav */}
-                <MobileMenu navItems={navItems} />
+                <MobileMenu navItems={displayNavItems} />
             </Container>
         </header>
     );

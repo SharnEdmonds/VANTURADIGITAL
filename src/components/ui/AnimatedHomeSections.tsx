@@ -103,7 +103,7 @@ export function BrandStatementAnimated() {
             <p className="mb-8 text-lg leading-relaxed text-text-secondary">
               We operate on strategic retainers — not bloated agency contracts. Retainers
               let us invest in your growth continuously, rather than nickel-and-diming
-              every request. Three pillars. Zero waste. Every dollar tracked.
+              every request. Six pillars. Zero waste. Every dollar tracked.
             </p>
             <motion.div
               initial={{ opacity: 0, y: 30 }}

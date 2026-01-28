@@ -146,7 +146,7 @@ export function ServiceBentoGrid() {
           Service Architecture
         </p>
         <h2 className="mb-grid-3 font-heading text-4xl font-bold leading-tight tracking-tight text-gallery md:text-5xl">
-          Three Pillars.
+          Six Pillars.
           <br />
           Zero Bloat.
         </h2>

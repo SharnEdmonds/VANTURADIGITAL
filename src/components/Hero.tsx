@@ -80,7 +80,7 @@ export default function Hero() {
                     className="mt-6 max-w-xl text-center text-lg leading-relaxed text-text-secondary md:text-xl"
                 >
                     High-performance digital without the bloat.
-                    Three pillars. Zero waste. Every dollar tracked.
+                    Six pillars. Zero waste. Every dollar tracked.
                 </motion.p>
 
                 {/* CTA Buttons */}

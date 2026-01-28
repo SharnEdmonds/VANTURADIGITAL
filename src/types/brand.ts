@@ -66,7 +66,7 @@ export interface ProofPoint {
 }
 
 /**
- * Service Architecture — the three pillars.
+ * Service Architecture — the six pillars.
  */
 export interface Service {
   _id: string;
