@@ -1,7 +1,6 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 
@@ -9,28 +8,12 @@ const stats = [
     { value: "45", label: "Projects Shipped", suffix: "+" },
     { value: "98", label: "Retention Rate", suffix: "%" },
     { value: "3.2", label: "Avg ROAS", suffix: "x" },
-    { value: "0", label: "Retainers", suffix: "" },
+    { value: "12", label: "Active Retainers", suffix: "+" },
 ];
 
 export function AboutMission() {
-    const sectionRef = useRef<HTMLDivElement>(null);
-    const { scrollYProgress } = useScroll({
-        target: sectionRef,
-        offset: ["start end", "end start"],
-    });
-
-    const glowY = useTransform(scrollYProgress, [0, 1], [50, -50]);
-    const glowOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 0.15, 0.15, 0]);
-
     return (
-        <section ref={sectionRef} className="relative mx-auto w-full max-w-7xl px-6 py-24 lg:px-8 overflow-hidden">
-            {/* Parallax background glow */}
-            <motion.div
-                style={{ y: glowY, opacity: glowOpacity }}
-                className="pointer-events-none absolute -right-40 top-0 z-0"
-            >
-                <div className="h-[600px] w-[600px] rounded-full bg-[radial-gradient(circle_at_center,var(--color-signal)_0%,transparent_70%)] blur-[120px]" />
-            </motion.div>
+        <section className="relative mx-auto w-full max-w-7xl px-6 py-24 lg:px-8 overflow-hidden">
 
             <div className="relative z-10 grid gap-16 lg:grid-cols-2 lg:gap-24">
                 {/* Text Content */}

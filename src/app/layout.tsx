@@ -118,6 +118,11 @@ export async function generateMetadata(): Promise<Metadata> {
         "max-snippet": -1,
       },
     },
+    icons: {
+      icon: "/images/logo-icon.png",
+      shortcut: "/images/logo-icon.png",
+      apple: "/images/logo-icon.png",
+    },
   };
 }
 

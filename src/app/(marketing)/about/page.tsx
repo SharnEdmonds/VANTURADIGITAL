@@ -3,7 +3,6 @@ import { AboutMission } from "@/components/features/about/AboutMission";
 import { ValuesGrid } from "@/components/features/about/ValuesGrid";
 import { ComparisonTable } from "@/components/features/about/ComparisonTable";
 import { TechStack } from "@/components/features/about/TechStack";
-import { MarqueeSection } from "@/components/ui/ScrollMarquee";
 import { LeadCaptureSection } from "@/components/features/lead-capture/lead-capture-section";
 
 export default function AboutPage() {
@@ -16,16 +15,6 @@ export default function AboutPage() {
       />
 
       <AboutMission />
-
-      <MarqueeSection
-        items={[
-          "TRANSPARENCY",
-          "ENGINEERING",
-          "PERFORMANCE",
-          "RESULTS",
-          "SPEED",
-        ]}
-      />
 
       <ValuesGrid />
       <ComparisonTable />

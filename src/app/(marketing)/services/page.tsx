@@ -1,6 +1,5 @@
 import { PageHero } from "@/components/ui/PageHero";
 import InteractiveServiceGrid from "@/components/features/services/InteractiveServiceGrid";
-import { MarqueeSection } from "@/components/ui/ScrollMarquee";
 import { ProcessTimeline } from "@/components/features/services/process-timeline";
 import { LeadCaptureSection } from "@/components/features/lead-capture/lead-capture-section";
 
@@ -14,10 +13,6 @@ export default function ServicesPage() {
       />
 
       <InteractiveServiceGrid />
-
-      <div className="py-24">
-        <MarqueeSection />
-      </div>
 
       <ProcessTimeline />
 

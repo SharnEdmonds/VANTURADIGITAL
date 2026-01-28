@@ -6,8 +6,8 @@ import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 const comparisonData = [
     {
         feature: "Pricing Model",
-        traditional: "Monthly Retainers",
-        vantura: "Project-Based / Results",
+        traditional: "Locked-in Retainers",
+        vantura: "Project-Based + Optional Retainers",
     },
     {
         feature: "Team Structure",

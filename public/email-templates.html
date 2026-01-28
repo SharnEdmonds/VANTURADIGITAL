@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vantura Digital Email Templates</title>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      margin: 0;
+      padding: 40px;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+      gap: 40px;
+    }
+
+    .template-wrapper {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-size: 18px;
+      color: #555;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-align: center;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 15px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 900px;
+      border: none;
+      background: #0A0A0B;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1 style="text-align: center; margin-bottom: 40px;">Email Template Previews</h1>
+
+  <div class="container">
+    <!-- Quote Request Template -->
+    <div class="template-wrapper">
+      <h2>Quote Request (Ecommerce Package)</h2>
+      <iframe id="quote-frame"></iframe>
+    </div>
+
+    <!-- General Inquiry Template -->
+    <div class="template-wrapper">
+      <h2>General Inquiry</h2>
+      <iframe id="inquiry-frame"></iframe>
+    </div>
+  </div>
+
+  <script>
+    // Logo URL (assuming local dev)
+    const logoUrl = "/images/logo-with-text.png";
+
+    // Helper to format currency
+    const formatCurrency = (amount) =>
+      new Intl.NumberFormat("en-NZ", {
+        style: "currency",
+        currency: "NZD",
+        minimumFractionDigits: 0,
+      }).format(amount);
+
+    // Template Generator Function
+    function generateEmailHtml(data) {
+      const { name, email, company, service, budget, message, quote } = data;
+
+      // Build quote section - wrapped in table row for proper email layout
+      const quoteSection = quote ? `
+              <tr>
+                <td style="padding: 0 40px 32px;">
+                <div style="padding: 20px; background: linear-gradient(135deg, #1A1A1B 0%, #2A2A2B 100%); border: 1px solid #FF4F00; border-radius: 6px;">
+                    <h2 style="margin: 0 0 16px; font-size: 16px; color: #FF4F00; text-transform: uppercase; letter-spacing: 2px;">Quote Configuration</h2>
+                    
+                    <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #3A3A3B;">
+                        <p style="margin: 0 0 4px; color: #999; font-size: 11px; text-transform: uppercase; letter-spacing: 1px;">Core Package</p>
+                        <p style="margin: 0; font-size: 16px; font-weight: bold; color: #EEEEEE;">${quote.package} — ${quote.packageLabel}</p>
+                        <p style="margin: 4px 0 0; font-size: 14px; color: #FF4F00;">${formatCurrency(quote.packageUpfront)} + ${formatCurrency(quote.packageMonthly)}/mo</p>
+                    </div>
+                    
+                    ${quote.addOns.length > 0 ? `
+                    <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #3A3A3B;">
+                        <p style="margin: 0 0 8px; color: #999; font-size: 11px; text-transform: uppercase; letter-spacing: 1px;">Add-on Services</p>
+                        ${quote.addOns.map(addon => `
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                            <span style="font-size: 14px; color: #EEEEEE;">+ ${addon.name}</span>
+                            <span style="font-size: 13px; color: #999;">${formatCurrency(addon.setup)} / ${formatCurrency(addon.monthly)}/mo</span>
+                        </div>
+                        `).join('')}
+                    </div>
+                    ` : ''}
+                    
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 8px;">
+                        <div>
+                            <p style="margin: 0; color: #999; font-size: 11px; text-transform: uppercase; letter-spacing: 1px;">Total Investment</p>
+                            <p style="margin: 4px 0 0; font-size: 20px; font-weight: bold; color: #EEEEEE;">${formatCurrency(quote.totalUpfront)} <span style="font-size: 14px; color: #999;">one-time</span></p>
+                        </div>
+                        <div style="text-align: right;">
+                            <p style="margin: 0; color: #999; font-size: 11px; text-transform: uppercase; letter-spacing: 1px;">Monthly</p>
+                            <p style="margin: 4px 0 0; font-size: 20px; font-weight: bold; color: #FF4F00;">${formatCurrency(quote.totalMonthly)}<span style="font-size: 14px; color: #999;">/mo</span></p>
+                        </div>
+                    </div>
+                </div>
+                </td>
+              </tr>
+            ` : '';
+
+      // Return full HTML
+      return `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body style="margin: 0; padding: 0; background-color: #0A0A0B; font-family: 'Helvetica Neue', Arial, sans-serif;">
+      <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #0A0A0B; padding: 40px 20px;">
+        <tr>
+          <td align="center">
+            <table width="600" cellpadding="0" cellspacing="0" style="max-width: 600px; background-color: #1A1A1B; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.3);">
+              
+                <!-- Header with Logo -->
+              <tr>
+                <td align="center" style="background: linear-gradient(135deg, #1A1A1B 0%, #252526 100%); padding: 32px 40px; border-bottom: 1px solid #2A2A2B;">
+                  <img src="${logoUrl}" alt="Vantura Digital" width="180" style="display: block; height: auto; max-width: 180px;" />
+                </td>
+              </tr>
+              
+              <!-- Title Banner -->
+              <tr>
+                <td style="padding: 32px 40px; background: linear-gradient(90deg, rgba(255,79,0,0.1) 0%, rgba(255,79,0,0.02) 100%); border-bottom: 1px solid #2A2A2B;">
+                  <h1 style="margin: 0; font-size: 24px; font-weight: 700; color: #EEEEEE; letter-spacing: -0.5px;">
+                    ${quote ? '📊 New Quote Request' : '💬 New Project Inquiry'}
+                  </h1>
+                  <p style="margin: 8px 0 0; font-size: 13px; color: #888;">Received ${new Date().toLocaleDateString('en-NZ', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</p>
+                </td>
+              </tr>
+              
+              <!-- Contact Details Card -->
+              <tr>
+                <td style="padding: 32px 40px;">
+                  <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #252526; border-radius: 6px; overflow: hidden;">
+                    <tr>
+                      <td style="padding: 20px 24px;">
+                        <p style="margin: 0 0 16px; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #FF4F00; font-weight: 600;">Contact Details</p>
+                        
+                        <table width="100%" cellpadding="0" cellspacing="0">
+                          <tr>
+                            <td style="padding: 8px 0; border-bottom: 1px solid #3A3A3B;">
+                              <span style="display: inline-block; width: 80px; color: #666; font-size: 12px; text-transform: uppercase;">Name</span>
+                              <span style="color: #EEEEEE; font-size: 15px; font-weight: 500;">${name}</span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style="padding: 8px 0; border-bottom: 1px solid #3A3A3B;">
+                              <span style="display: inline-block; width: 80px; color: #666; font-size: 12px; text-transform: uppercase;">Email</span>
+                              <a href="mailto:${email}" style="color: #FF4F00; font-size: 15px; text-decoration: none; font-weight: 500;">${email}</a>
+                            </td>
+                          </tr>
+                          ${company ? `
+                          <tr>
+                            <td style="padding: 8px 0;">
+                              <span style="display: inline-block; width: 80px; color: #666; font-size: 12px; text-transform: uppercase;">Company</span>
+                              <span style="color: #EEEEEE; font-size: 15px; font-weight: 500;">${company}</span>
+                            </td>
+                          </tr>
+                          ` : ''}
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              
+              ${quoteSection}
+              
+              <!-- Message Card -->
+              <tr>
+                <td style="padding: 0 40px 32px;">
+                  <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #252526; border-radius: 6px; border-left: 3px solid #FF4F00; overflow: hidden;">
+                    <tr>
+                      <td style="padding: 20px 24px;">
+                        <p style="margin: 0 0 12px; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #FF4F00; font-weight: 600;">Project Details</p>
+                        <p style="margin: 0; font-size: 14px; line-height: 1.7; color: #DDDDDD; white-space: pre-wrap;">${message}</p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              
+              <!-- Footer -->
+              <tr>
+                <td style="padding: 24px 40px; background-color: #0F0F10; border-top: 1px solid #2A2A2B;">
+                  <table width="100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td>
+                        <p style="margin: 0 0 4px; font-size: 12px; color: #666;">Vantura Digital</p>
+                        <p style="margin: 0; font-size: 11px; color: #555;">Web Development • SEO & GEO • Paid Advertising</p>
+                      </td>
+                      <td align="right">
+                        <a href="mailto:${email}" style="display: inline-block; padding: 10px 20px; background-color: #FF4F00; color: #FFFFFF; font-size: 12px; font-weight: 600; text-decoration: none; border-radius: 4px;">Reply to ${name.split(' ')[0]}</a>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              
+            </table>
+            
+            <p style="margin: 24px 0 0; font-size: 11px; color: #555; text-align: center;">
+              Sent from vanturadigital.co.nz contact form
+            </p>
+          </td>
+        </tr>
+      </table>
+    </body>
+    </html>
+            `;
+    }
+
+    // Mock Data for Quote Request
+    const quoteData = {
+      name: "Sarah Jenkins",
+      email: "sarah@mystartup.co.nz",
+      company: "MyStartup Ltd",
+      message: "We're looking to scale our online store and need a robust platform that can handle 50k+ SKUs. Also interested in improving our local SEO presence.",
+      quote: {
+        package: "Ecommerce",
+        packageLabel: "Revenue Scale",
+        packageUpfront: 9200,
+        packageMonthly: 300,
+        addOns: [
+          { name: "SEO & GEO Foundation", setup: 1200, monthly: 950 },
+          { name: "Google Ads Architecture", setup: 850, monthly: 600 }
+        ],
+        totalUpfront: 11250,
+        totalMonthly: 1850
+      }
+    };
+
+    // Mock Data for General Inquiry
+    const inquiryData = {
+      name: "John Smith",
+      email: "john@enterprise.com",
+      message: "Hi team, I'm interested in a custom web application for our internal logistics tracking. It's not a standard website, so I'd like to discuss if this is something you can build. We have a budget of around $25k.",
+    };
+
+    // Render templates
+    document.getElementById('quote-frame').srcdoc = generateEmailHtml(quoteData);
+    document.getElementById('inquiry-frame').srcdoc = generateEmailHtml(inquiryData);
+
+  </script>
+</body>
+
+</html>

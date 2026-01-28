@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui";
 import { MobileMenu } from "./mobile-menu";
@@ -27,14 +28,21 @@ export function HeaderClient({ navItems }: HeaderClientProps) {
                 {/* Logo with hover effect */}
                 <Link
                     href="/"
-                    className="group relative text-lg font-bold tracking-tight text-gallery"
+                    className="group relative flex items-center"
                 >
-                    <span className="relative z-10">Vantura Digital</span>
-                    <motion.span
-                        className="absolute bottom-0 left-0 h-[2px] w-0 bg-signal"
-                        whileHover={{ width: "100%" }}
-                        transition={{ duration: 0.3 }}
-                    />
+                    <motion.div
+                        whileHover={{ scale: 1.02 }}
+                        transition={{ duration: 0.2 }}
+                    >
+                        <Image
+                            src="/images/logo-with-text.png"
+                            alt="Vantura Digital"
+                            width={180}
+                            height={40}
+                            className="h-8 w-auto"
+                            priority
+                        />
+                    </motion.div>
                 </Link>
 
                 {/* Desktop nav with hover effects */}

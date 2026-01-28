@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/ui/PageHero";
-import { ContactForm } from "@/components/features/contact/ContactForm";
-import { MarqueeSection } from "@/components/ui/ScrollMarquee";
+import { ContactFormWithQuote } from "@/components/features/contact/ContactFormWithQuote";
 import { ContactSidebar } from "./ContactSidebar";
 
 export const metadata: Metadata = {
@@ -19,22 +18,11 @@ export default function ContactPage() {
         subtitle="Tell us about your project. We'll respond within 24 hours with an honest assessment of whether we can help — and if we can, how."
       />
 
-      <MarqueeSection
-        items={[
-          "WEB DEV",
-          "SEO",
-          "PAID ADS",
-          "ANALYTICS",
-          "PERFORMANCE",
-          "CRO",
-        ]}
-      />
-
       <section className="mx-auto w-full max-w-7xl px-6 py-24 lg:px-8">
         <div className="grid gap-16 lg:grid-cols-5 lg:gap-24">
-          {/* Contact Form */}
+          {/* Contact Form with Quote */}
           <div className="lg:col-span-3">
-            <ContactForm />
+            <ContactFormWithQuote />
           </div>
 
           {/* Contact Info Sidebar */}

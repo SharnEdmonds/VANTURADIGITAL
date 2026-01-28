@@ -27,7 +27,10 @@ export function ContactForm() {
         budget: "",
         message: "",
     });
+    // Honeypot field for anti-spam (invisible to users, bots fill it in)
+    const [honeypot, setHoneypot] = useState("");
     const [errors, setErrors] = useState<Partial<Record<keyof FormData, boolean>>>({});
+    const [submitError, setSubmitError] = useState<string | null>(null);
     const formRef = useRef<HTMLFormElement>(null);
 
     const filledCount = Object.values(formData).filter((v) => v.length > 0).length;
@@ -56,10 +59,28 @@ export function ContactForm() {
         }
 
         setIsSubmitting(true);
-        // Simulate API call
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-        setIsSubmitting(false);
-        setIsSuccess(true);
+        setSubmitError(null);
+
+        try {
+            const res = await fetch("/api/contact", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ ...formData, _honeypot: honeypot }),
+            });
+
+            if (!res.ok) {
+                const data = await res.json().catch(() => ({}));
+                throw new Error(data.error || "Something went wrong");
+            }
+
+            setIsSuccess(true);
+        } catch (err) {
+            setSubmitError(
+                err instanceof Error ? err.message : "Failed to send message. Please try again."
+            );
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     const inputClasses =
@@ -83,8 +104,8 @@ export function ContactForm() {
                         hasError
                             ? "border-red-500"
                             : focusedField === name
-                            ? "border-signal"
-                            : "border-gallery/10"
+                                ? "border-signal"
+                                : "border-gallery/10"
                     )}
                     animate={hasError ? { x: [0, -4, 4, -4, 4, 0] } : {}}
                     transition={{ duration: 0.4 }}
@@ -217,6 +238,19 @@ export function ContactForm() {
                         onSubmit={handleSubmit}
                         className="space-y-6"
                     >
+                        {/* Honeypot field - hidden from users, bots fill it in */}
+                        <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", opacity: 0, pointerEvents: "none" }}>
+                            <label htmlFor="website">Website</label>
+                            <input
+                                type="text"
+                                id="website"
+                                name="website"
+                                tabIndex={-1}
+                                autoComplete="off"
+                                value={honeypot}
+                                onChange={(e) => setHoneypot(e.target.value)}
+                            />
+                        </div>
                         <div className="grid gap-6 sm:grid-cols-2">
                             {renderField("name", "Name", "input", {
                                 placeholder: "Jane Smith",
@@ -246,10 +280,11 @@ export function ContactForm() {
                                 children: (
                                     <>
                                         <option value="">Select a range</option>
+                                        <option value="pilot">Pilot Build (Retainer Only)</option>
+                                        <option value="2k-5k">$2k - $5k</option>
                                         <option value="5k-10k">$5k - $10k</option>
-                                        <option value="10k-25k">$10k - $25k</option>
-                                        <option value="25k-50k">$25k - $50k</option>
-                                        <option value="50k+">$50k+</option>
+                                        <option value="10k-15k">$10k - $15k</option>
+                                        <option value="15k+">$15k+</option>
                                     </>
                                 ),
                             })}
@@ -259,6 +294,16 @@ export function ContactForm() {
                             placeholder:
                                 "Tell us about your goals, timeline, and current pain points...",
                         })}
+
+                        {submitError && (
+                            <motion.p
+                                initial={{ opacity: 0, y: -5 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                className="text-sm text-red-400 border border-red-400/20 bg-red-400/5 px-4 py-3"
+                            >
+                                {submitError}
+                            </motion.p>
+                        )}
 
                         <motion.button
                             whileHover={{ scale: 1.02 }}
