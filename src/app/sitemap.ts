@@ -1,12 +1,26 @@
 import type { MetadataRoute } from "next";
+import { sanityFetch } from "@/lib/sanity/client";
+import { groq } from "next-sanity";
 
 // ═══════════════════════════════════════════════════════════════
 // sitemap.xml — Dynamic generation for SEO
 // ═══════════════════════════════════════════════════════════════
 
-export default function sitemap(): MetadataRoute.Sitemap {
-    // Ensure valid absolute URLs for production
-    const baseUrl = "https://vanturadigital.co.nz";
+// Query for blog posts with slug and publishedAt for sitemap
+const blogPostsForSitemapQuery = groq`
+  *[_type == "post" && defined(slug.current)] | order(publishedAt desc) {
+    "slug": slug.current,
+    publishedAt
+  }
+`;
+
+interface BlogPostSitemap {
+    slug: string;
+    publishedAt?: string;
+}
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://vanturadigital.co.nz";
     const now = new Date();
 
     // Static marketing pages
@@ -38,8 +52,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
         {
             url: `${baseUrl}/blog`,
             lastModified: now,
-            changeFrequency: "weekly",
-            priority: 0.7,
+            changeFrequency: "daily",
+            priority: 0.8,
         },
         {
             url: `${baseUrl}/privacy`,
@@ -55,5 +69,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
     ];
 
-    return staticPages;
+    // Fetch dynamic blog posts from Sanity
+    let blogPosts: BlogPostSitemap[] = [];
+    try {
+        blogPosts = await sanityFetch<BlogPostSitemap[]>({
+            query: blogPostsForSitemapQuery,
+            tags: ["post"],
+        }) || [];
+    } catch {
+        // If Sanity is unreachable, continue with static pages only
+        console.warn("Could not fetch blog posts for sitemap");
+    }
+
+    // Generate blog post URLs
+    const blogPostPages: MetadataRoute.Sitemap = blogPosts.map((post) => ({
+        url: `${baseUrl}/blog/${post.slug}`,
+        lastModified: post.publishedAt ? new Date(post.publishedAt) : now,
+        changeFrequency: "monthly" as const,
+        priority: 0.7,
+    }));
+
+    return [...staticPages, ...blogPostPages];
 }

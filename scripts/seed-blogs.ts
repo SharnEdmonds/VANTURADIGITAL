@@ -14,7 +14,7 @@ const client = getCliClient({ apiVersion: '2025-01-27' });
 // --- Content Data ---
 
 const AUTHOR_NAME = "Vantura Digital Team";
-const BLOG_IMAGES = {
+const BLOG_IMAGES: Record<string, string> = {
     seo: "C:/Users/sharn/.gemini/antigravity/brain/f01eec39-b133-4f38-a74a-093e134ba53c/blog_seo_header_1769606805495.png",
     performance: "C:/Users/sharn/.gemini/antigravity/brain/f01eec39-b133-4f38-a74a-093e134ba53c/blog_performance_header_1769606910843.png",
     design: "C:/Users/sharn/.gemini/antigravity/brain/f01eec39-b133-4f38-a74a-093e134ba53c/blog_design_roi_header_1769606995502.png",

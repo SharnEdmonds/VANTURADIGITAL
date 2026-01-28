@@ -41,6 +41,9 @@ export async function generateMetadata({
     return {
         title: post.title,
         description: post.excerpt || `Read ${post.title} on the Vantura Digital blog.`,
+        alternates: {
+            canonical: `/blog/${slug}`,
+        },
         openGraph: {
             title: post.title,
             images: post.mainImage?.asset?.url
@@ -68,18 +71,18 @@ export default async function BlogPostPage({
     const categoryIds = post.categories?.map((c) => c._id) || [];
     const relatedPosts = categoryIds.length
         ? await sanityFetch<Post[]>({
-              query: relatedPostsQuery,
-              params: { postId: post._id, categoryIds },
-              tags: ["post"],
-          })
+            query: relatedPostsQuery,
+            params: { postId: post._id, categoryIds },
+            tags: ["post"],
+        })
         : [];
 
     const date = post.publishedAt
         ? new Date(post.publishedAt).toLocaleDateString("en-US", {
-              month: "long",
-              day: "numeric",
-              year: "numeric",
-          })
+            month: "long",
+            day: "numeric",
+            year: "numeric",
+        })
         : null;
 
     return (
