@@ -201,7 +201,7 @@ const services = [
         title: "Web Development",
         description:
             "Performance-first engineering. Next.js, React, WordPress themes, custom plugin development, and headless CMS architectures.",
-        capabilities: ["Next.js 15", "React 19", "WordPress", "Plugin Dev"],
+        capabilities: ["Next.js 15", "WordPress", "Shopify", "SiteGround", "Plugin Dev"],
         videoSrc: "/videos/hero.mp4",
     },
     {

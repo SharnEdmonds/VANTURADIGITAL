@@ -6,7 +6,7 @@ import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 const technologies = [
     "Next.js 15", "React 19", "TypeScript", "Tailwind CSS",
     "Framer Motion", "Sanity CMS", "Supabase", "Vercel",
-    "PostgreSQL", "GraphQL", "Redis", "Docker"
+    "PostgreSQL", "WordPress", "Shopify", "SiteGround", "Plugin Dev"
 ];
 
 function FloatingPill({ tech, index }: { tech: string; index: number }) {
