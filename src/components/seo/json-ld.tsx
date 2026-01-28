@@ -25,7 +25,7 @@ export function OrganizationSchema() {
         "@type": "Organization",
         name: "Vantura Digital",
         url: siteConfig.url,
-        logo: `${siteConfig.url}/images/og-default.png`,
+        logo: `${siteConfig.url}/images/og-default.webp`,
         description: siteConfig.description,
         foundingDate: "2024",
         address: {
@@ -71,7 +71,7 @@ export function LocalBusinessSchema() {
         "@type": "ProfessionalService",
         name: "Vantura Digital",
         url: siteConfig.url,
-        image: `${siteConfig.url}/images/og-default.png`,
+        image: `${siteConfig.url}/images/og-default.webp`,
         description: siteConfig.description,
         address: {
             "@type": "PostalAddress",

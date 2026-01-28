@@ -187,7 +187,7 @@ export async function POST(req: NextRequest) {
   // Build the HTML email body with professional design
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://vanturadigital.co.nz";
   // Always use production URL for email images to ensure they load in email clients
-  const logoUrl = "https://vanturadigital.co.nz/images/logo-with-text.png";
+  const logoUrl = "https://vanturadigital.co.nz/images/logo-with-text.webp";
 
   const htmlContent = `
     <!DOCTYPE html>

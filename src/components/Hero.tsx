@@ -36,7 +36,7 @@ export default function Hero() {
                     loop
                     playsInline
                     preload="auto"
-                    poster="/images/og-default.png"
+                    poster="/images/og-default.webp"
                     className="w-full h-full object-cover"
                     aria-hidden="true"
                 >

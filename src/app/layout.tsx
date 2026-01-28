@@ -124,9 +124,9 @@ export async function generateMetadata(): Promise<Metadata> {
       },
     },
     icons: {
-      icon: "/images/logo-icon.png",
-      shortcut: "/images/logo-icon.png",
-      apple: "/images/logo-icon.png",
+      icon: "/images/logo-icon.webp",
+      shortcut: "/images/logo-icon.webp",
+      apple: "/images/logo-icon.webp",
     },
   };
 }
@@ -147,6 +147,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <link rel="preconnect" href="https://cdn.sanity.io" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://cdn.sanity.io" />
+
+        {/* Optimize LCP Image: Preload Hero Poster */}
+        <link
+          rel="preload"
+          href="/images/og-default.webp"
+          as="image"
+          fetchPriority="high"
+        />
 
         {/* JSON-LD Structured Data for SEO */}
         <OrganizationSchema />

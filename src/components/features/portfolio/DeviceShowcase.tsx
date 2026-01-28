@@ -146,7 +146,7 @@ export function DeviceShowcase() {
                             data-cursor="view"
                         >
                             <Image
-                                src="/images/mockup-macbook.png"
+                                src="/images/mockup-macbook.webp"
                                 alt="Portfolio project on MacBook Pro"
                                 width={900}
                                 height={563}

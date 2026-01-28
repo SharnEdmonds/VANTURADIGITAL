@@ -35,7 +35,7 @@ export function HeaderClient({ navItems }: HeaderClientProps) {
                         transition={{ duration: 0.2 }}
                     >
                         <Image
-                            src="/images/logo-with-text.png"
+                            src="/images/logo-with-text.webp"
                             alt="Vantura Digital"
                             width={260}
                             height={50}
