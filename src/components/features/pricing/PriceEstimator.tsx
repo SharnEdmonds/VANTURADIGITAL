@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 
 // ═══════════════════════════════════════════════════════════════
@@ -130,9 +131,15 @@ export function PriceEstimator() {
         };
     }, [selectedPackage, selectedAddOns]);
 
+    const router = useRouter();
+
     const handleGenerateQuote = () => {
-        setIsQuoteGenerated(true);
-        // In production, this would trigger an API call or modal
+        // Redirect to contact page with selected options
+        const params = new URLSearchParams();
+        if (selectedPackage) params.set("package", selectedPackage);
+        if (selectedAddOns.length > 0) params.set("addOns", selectedAddOns.join(","));
+
+        router.push(`/contact?${params.toString()}`);
     };
 
     return (
@@ -382,7 +389,7 @@ export function PriceEstimator() {
                                             className="w-full bg-signal py-4 font-heading font-bold uppercase tracking-wider text-white transition-colors hover:bg-signal-hover"
                                             suppressHydrationWarning
                                         >
-                                            Generate Professional Quote
+                                            Get Official Quote
                                         </button>
                                         <p className="mt-4 text-center font-mono text-xs text-text-muted">
                                             No obligation. Instant response.

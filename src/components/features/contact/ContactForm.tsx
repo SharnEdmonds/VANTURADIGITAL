@@ -229,6 +229,14 @@ export function ContactForm() {
                         >
                             We&apos;ll be in touch within 24 hours with your technical audit.
                         </motion.p>
+                        <motion.p
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.6 }}
+                            className="mt-4 max-w-xs text-xs text-text-muted bg-gallery/5 p-3 rounded"
+                        >
+                            <strong>Note:</strong> Please check your junk/spam folder if you don&apos;t see our confirmation email immediately.
+                        </motion.p>
                     </motion.div>
                 ) : (
                     <motion.form

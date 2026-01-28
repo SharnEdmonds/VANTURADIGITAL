@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 // ═══════════════════════════════════════════════════════════════
@@ -58,9 +59,24 @@ interface ContactFormData {
 }
 
 export function ContactFormWithQuote() {
+    const searchParams = useSearchParams();
+
     // Quote state
     const [selectedPackage, setSelectedPackage] = useState<string>("");
     const [selectedAddOns, setSelectedAddOns] = useState<string[]>([]);
+
+    // Initialize from URL params
+    useEffect(() => {
+        const pkg = searchParams.get("package");
+        const addons = searchParams.get("addOns");
+
+        if (pkg) {
+            setSelectedPackage(pkg);
+        }
+        if (addons) {
+            setSelectedAddOns(addons.split(","));
+        }
+    }, [searchParams]);
 
     // Form state
     const [formData, setFormData] = useState<ContactFormData>({

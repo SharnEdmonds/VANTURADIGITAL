@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { PageHero } from "@/components/ui/PageHero";
 import { ContactFormWithQuote } from "@/components/features/contact/ContactFormWithQuote";
@@ -22,7 +23,9 @@ export default function ContactPage() {
         <div className="grid gap-16 lg:grid-cols-5 lg:gap-24">
           {/* Contact Form with Quote */}
           <div className="lg:col-span-3">
-            <ContactFormWithQuote />
+            <Suspense fallback={<div className="h-[600px] animate-pulse bg-carbon-light rounded-lg" />}>
+              <ContactFormWithQuote />
+            </Suspense>
           </div>
 
           {/* Contact Info Sidebar */}
