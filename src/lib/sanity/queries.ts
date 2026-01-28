@@ -268,6 +268,139 @@ export const featuredProjectsQuery = groq`
 // Site Settings (navigation, social, meta)
 // ───────────────────────────────────────────────
 
+// ───────────────────────────────────────────────
+// Blog (Posts, Authors, Categories)
+// ───────────────────────────────────────────────
+
+/** Fetch all posts with dereferenced author & categories — used on /blog listing */
+export const postsQuery = groq`
+  *[_type == "post"] | order(publishedAt desc) {
+    _id,
+    title,
+    slug,
+    publishedAt,
+    mainImage {
+      ...,
+      asset-> {
+        _id,
+        url,
+        metadata {
+          dimensions,
+          lqip
+        }
+      }
+    },
+    "excerpt": array::join(string::split(pt::text(body), "")[0..200], "") + "...",
+    author-> {
+      _id,
+      name,
+      slug,
+      image {
+        ...,
+        asset-> { _id, url }
+      }
+    },
+    categories[]-> {
+      _id,
+      title,
+      slug
+    }
+  }
+`;
+
+/** Fetch a single post by slug with full body — used on /blog/[slug] */
+export const postBySlugQuery = groq`
+  *[_type == "post" && slug.current == $slug][0] {
+    _id,
+    title,
+    slug,
+    publishedAt,
+    body,
+    mainImage {
+      ...,
+      asset-> {
+        _id,
+        url,
+        metadata {
+          dimensions,
+          lqip
+        }
+      }
+    },
+    author-> {
+      _id,
+      name,
+      slug,
+      image {
+        ...,
+        asset-> { _id, url }
+      },
+      bio
+    },
+    categories[]-> {
+      _id,
+      title,
+      slug
+    }
+  }
+`;
+
+/** Fetch all post slugs for generateStaticParams */
+export const postSlugsQuery = groq`
+  *[_type == "post" && defined(slug.current)] {
+    "slug": slug.current
+  }
+`;
+
+/** Fetch related posts in same category, excluding current post */
+export const relatedPostsQuery = groq`
+  *[_type == "post" && _id != $postId && count(categories[@._ref in $categoryIds]) > 0] | order(publishedAt desc) [0...2] {
+    _id,
+    title,
+    slug,
+    publishedAt,
+    mainImage {
+      ...,
+      asset-> {
+        _id,
+        url,
+        metadata {
+          dimensions,
+          lqip
+        }
+      }
+    },
+    "excerpt": array::join(string::split(pt::text(body), "")[0..200], "") + "...",
+    author-> {
+      _id,
+      name,
+      image {
+        ...,
+        asset-> { _id, url }
+      }
+    },
+    categories[]-> {
+      _id,
+      title,
+      slug
+    }
+  }
+`;
+
+/** Fetch all categories — used for blog filter */
+export const categoriesQuery = groq`
+  *[_type == "category"] | order(title asc) {
+    _id,
+    title,
+    slug,
+    description
+  }
+`;
+
+// ───────────────────────────────────────────────
+// Site Settings (navigation, social, meta)
+// ───────────────────────────────────────────────
+
 export const siteSettingsQuery = groq`
   *[_type == "siteSettings"][0] {
     title,

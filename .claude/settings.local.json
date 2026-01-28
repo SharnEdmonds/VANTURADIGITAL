@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(wc:*)",
+      "mcp__Sanity__query_documents",
+      "Bash(tree:*)",
+      "Bash(ls:*)",
+      "Bash(npx next build:*)"
+    ]
+  }
+}

@@ -158,31 +158,7 @@ export function CustomCursor() {
                         mass: 0.5,
                     }}
                 >
-                    {/* Contextual text */}
-                    <AnimatePresence mode="wait">
-                        {cursorType === "view" && (
-                            <motion.span
-                                key="view"
-                                initial={{ opacity: 0, scale: 0.5 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.5 }}
-                                className="font-heading text-[9px] font-bold uppercase tracking-wider text-carbon"
-                            >
-                                View
-                            </motion.span>
-                        )}
-                        {cursorType === "play" && (
-                            <motion.span
-                                key="play"
-                                initial={{ opacity: 0, scale: 0.5 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.5 }}
-                                className="font-heading text-[9px] font-bold uppercase tracking-wider text-carbon"
-                            >
-                                Play
-                            </motion.span>
-                        )}
-                    </AnimatePresence>
+                    {/* Text labels removed */}
                 </motion.div>
             </motion.div>
 

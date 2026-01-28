@@ -39,3 +39,51 @@ export interface SocialLink {
   platform: "twitter" | "linkedin" | "github" | "instagram";
   url: string;
 }
+
+// ═══════════════════════════════════════════════════════════════
+// Blog Types
+// ═══════════════════════════════════════════════════════════════
+
+export interface Post {
+  _id: string;
+  title: string;
+  slug: { current: string };
+  publishedAt: string;
+  excerpt?: string;
+  mainImage?: {
+    _type: "image";
+    asset: {
+      _id: string;
+      url: string;
+      metadata?: {
+        dimensions?: { width: number; height: number };
+        lqip?: string;
+      };
+    };
+    alt?: string;
+  };
+  body?: unknown[];
+  author?: Author;
+  categories?: Category[];
+}
+
+export interface Author {
+  _id: string;
+  name: string;
+  slug?: { current: string };
+  image?: {
+    _type: "image";
+    asset: {
+      _id: string;
+      url: string;
+    };
+  };
+  bio?: unknown[];
+}
+
+export interface Category {
+  _id: string;
+  title: string;
+  slug?: { current: string };
+  description?: string;
+}

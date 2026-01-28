@@ -1,13 +1,38 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 
+const stats = [
+    { value: "45", label: "Projects Shipped", suffix: "+" },
+    { value: "98", label: "Retention Rate", suffix: "%" },
+    { value: "3.2", label: "Avg ROAS", suffix: "x" },
+    { value: "0", label: "Retainers", suffix: "" },
+];
+
 export function AboutMission() {
+    const sectionRef = useRef<HTMLDivElement>(null);
+    const { scrollYProgress } = useScroll({
+        target: sectionRef,
+        offset: ["start end", "end start"],
+    });
+
+    const glowY = useTransform(scrollYProgress, [0, 1], [50, -50]);
+    const glowOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 0.15, 0.15, 0]);
+
     return (
-        <section className="mx-auto w-full max-w-7xl px-6 py-24 lg:px-8">
-            <div className="grid gap-16 lg:grid-cols-2 lg:gap-24">
+        <section ref={sectionRef} className="relative mx-auto w-full max-w-7xl px-6 py-24 lg:px-8 overflow-hidden">
+            {/* Parallax background glow */}
+            <motion.div
+                style={{ y: glowY, opacity: glowOpacity }}
+                className="pointer-events-none absolute -right-40 top-0 z-0"
+            >
+                <div className="h-[600px] w-[600px] rounded-full bg-[radial-gradient(circle_at_center,var(--color-signal)_0%,transparent_70%)] blur-[120px]" />
+            </motion.div>
+
+            <div className="relative z-10 grid gap-16 lg:grid-cols-2 lg:gap-24">
                 {/* Text Content */}
                 <div className="flex flex-col justify-center">
                     <RevealOnScroll>
@@ -29,13 +54,26 @@ export function AboutMission() {
                 </div>
 
                 {/* Stats Grid */}
-                <div className="grid grid-cols-2 gap-px bg-gallery/10 border border-gallery/10">
-                    {[
-                        { value: "45", label: "Projects Shipped", suffix: "+" },
-                        { value: "98", label: "Retention Rate", suffix: "%" },
-                        { value: "3.2", label: "Avg ROAS", suffix: "x" },
-                        { value: "0", label: "Retainers", suffix: "" },
-                    ].map((stat, i) => (
+                <div className="relative grid grid-cols-2 gap-px bg-gallery/10 border border-gallery/10">
+                    {/* Connecting lines between stats on scroll */}
+                    <motion.div
+                        initial={{ scaleX: 0 }}
+                        whileInView={{ scaleX: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, delay: 0.5 }}
+                        className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-signal/20 to-transparent origin-top"
+                        style={{ transform: "translateX(-50%)" }}
+                    />
+                    <motion.div
+                        initial={{ scaleY: 0 }}
+                        whileInView={{ scaleY: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, delay: 0.6 }}
+                        className="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-signal/20 to-transparent origin-left"
+                        style={{ transform: "translateY(-50%)" }}
+                    />
+
+                    {stats.map((stat, i) => (
                         <div key={stat.label} className="bg-carbon p-8 md:p-10">
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}

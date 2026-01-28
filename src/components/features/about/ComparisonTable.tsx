@@ -50,24 +50,60 @@ export function ComparisonTable() {
                 {comparisonData.map((row, i) => (
                     <motion.div
                         key={row.feature}
-                        initial={{ opacity: 0, y: 10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
+                        initial={{ opacity: 0, x: -10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true, margin: "-50px" }}
-                        transition={{ delay: i * 0.1, duration: 0.4 }}
-                        className="grid grid-cols-1 gap-4 border-b border-gallery/5 p-6 last:border-0 md:grid-cols-3 md:gap-0 transition-colors hover:bg-gallery/[0.02]"
+                        transition={{ delay: i * 0.08, duration: 0.4 }}
+                        className="group grid grid-cols-1 gap-4 border-b border-gallery/5 p-6 last:border-0 md:grid-cols-3 md:gap-0 transition-all duration-300 hover:bg-gallery/[0.03] hover:pl-8"
                     >
                         <div className="font-heading font-bold text-gallery md:text-sm">
                             {row.feature}
                         </div>
 
-                        <div className="text-sm text-text-secondary line-through opacity-50 decoration-signal/50">
-                            <span className="md:hidden mr-2 text-xs uppercase tracking-wider text-text-muted no-underline opacity-100">Traditional:</span>
-                            {row.traditional}
+                        <div className="flex items-center gap-2 text-sm text-text-secondary line-through opacity-50 decoration-signal/50">
+                            {/* X icon */}
+                            <motion.svg
+                                initial={{ scale: 0 }}
+                                whileInView={{ scale: 1 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.08 + 0.2, type: "spring", stiffness: 300 }}
+                                width="14"
+                                height="14"
+                                viewBox="0 0 14 14"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="1.5"
+                                className="hidden shrink-0 text-red-400/60 md:block"
+                            >
+                                <path d="M11 3L3 11M3 3l8 8" />
+                            </motion.svg>
+                            <span>
+                                <span className="md:hidden mr-2 text-xs uppercase tracking-wider text-text-muted no-underline opacity-100">Traditional:</span>
+                                {row.traditional}
+                            </span>
                         </div>
 
-                        <div className="text-sm font-bold text-signal">
-                            <span className="md:hidden mr-2 text-xs uppercase tracking-wider text-text-muted font-normal text-gallery">Vantura:</span>
-                            {row.vantura}
+                        <div className="flex items-center gap-2 text-sm font-bold text-signal">
+                            {/* Checkmark icon */}
+                            <motion.svg
+                                initial={{ scale: 0 }}
+                                whileInView={{ scale: 1 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.08 + 0.3, type: "spring", stiffness: 300 }}
+                                width="14"
+                                height="14"
+                                viewBox="0 0 14 14"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                className="hidden shrink-0 text-signal md:block"
+                            >
+                                <path d="M11.5 3.5L5.5 10.5L2.5 7.5" />
+                            </motion.svg>
+                            <span>
+                                <span className="md:hidden mr-2 text-xs uppercase tracking-wider text-text-muted font-normal text-gallery">Vantura:</span>
+                                {row.vantura}
+                            </span>
                         </div>
                     </motion.div>
                 ))}
