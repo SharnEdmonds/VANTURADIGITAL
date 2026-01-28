@@ -38,10 +38,10 @@ export async function Footer() {
               measurable returns.
             </p>
             <a
-              href="mailto:hello@venturadigital.com"
+              href="mailto:hello@vanturadigital.co.nz"
               className="font-mono text-xs text-signal transition-colors hover:text-signal-light"
             >
-              hello@venturadigital.com
+              hello@vanturadigital.co.nz
             </a>
           </div>
 

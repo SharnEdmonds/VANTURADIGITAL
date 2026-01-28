@@ -42,10 +42,10 @@ export function ContactSidebar() {
                 </h3>
                 <MagneticElement strength={0.2} radius={150}>
                     <a
-                        href="mailto:hello@venturadigital.com"
-                        className="block text-xl text-signal transition-colors hover:text-signal-light"
+                        href="mailto:hello@vanturadigital.co.nz"
+                        className="transition-colors hover:text-signal"
                     >
-                        hello@venturadigital.com
+                        hello@vanturadigital.co.nz
                     </a>
                 </MagneticElement>
             </motion.div>

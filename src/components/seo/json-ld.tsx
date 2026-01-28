@@ -35,7 +35,7 @@ export function OrganizationSchema() {
         contactPoint: {
             "@type": "ContactPoint",
             contactType: "customer service",
-            email: "hello@venturadigital.co.nz",
+            email: "hello@vanturadigital.co.nz",
         },
         sameAs: [
             // Add social media URLs here when available
