@@ -99,6 +99,20 @@ export function CustomCursor() {
         return null;
     }
 
+    // Hide system cursor ONLY when this component is active and mounted
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useEffect(() => {
+        if (!mounted) return;
+
+        // Add class to hide cursor
+        document.body.classList.add('cursor-none');
+
+        return () => {
+            // cleanup
+            document.body.classList.remove('cursor-none');
+        };
+    }, [mounted]);
+
     // Check for reduced motion preference - accessibility
     if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
         return null;

@@ -288,7 +288,7 @@ export function ContactForm() {
                                 children: (
                                     <>
                                         <option value="">Select a range</option>
-                                        <option value="pilot">Pilot Build (Retainer Only)</option>
+                                        <option value="pilot">Pilot Build (3-Month Partnership Required)</option>
                                         <option value="2k-5k">$2k - $5k</option>
                                         <option value="5k-10k">$5k - $10k</option>
                                         <option value="10k-15k">$10k - $15k</option>

@@ -168,7 +168,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <LocalBusinessSchema />
       </head>
       <body
-        className="min-h-screen cursor-none bg-[var(--color-background)] font-sans antialiased"
+        className="min-h-screen bg-[var(--color-background)] font-sans antialiased"
         suppressHydrationWarning
       >
         {/* Custom cursor - replaces default */}
