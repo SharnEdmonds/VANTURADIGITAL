@@ -91,18 +91,18 @@ export function CustomCursor() {
         };
     }, [moveCursor, updateCursorState]);
 
-    // Don't render on touch devices or before mount
-    if (!mounted) return null;
-
-    // Check if this is likely a touch device
-    if (typeof window !== "undefined" && "ontouchstart" in window) {
-        return null;
-    }
-
     // Hide system cursor ONLY when this component is active and mounted
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
         if (!mounted) return;
+
+        // Replicate logic for when we DO NOT render, so we don't hide the cursor in those cases
+        const isTouch = typeof window !== "undefined" && "ontouchstart" in window;
+        const isReducedMotion = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const isCoarse = typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches;
+
+        if (isTouch || isReducedMotion || isCoarse) {
+            return;
+        }
 
         // Add class to hide cursor
         document.body.classList.add('cursor-none');
@@ -112,6 +112,16 @@ export function CustomCursor() {
             document.body.classList.remove('cursor-none');
         };
     }, [mounted]);
+
+    // Don't render on touch devices or before mount
+    if (!mounted) return null;
+
+    // Check if this is likely a touch device
+    if (typeof window !== "undefined" && "ontouchstart" in window) {
+        return null;
+    }
+
+
 
     // Check for reduced motion preference - accessibility
     if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
